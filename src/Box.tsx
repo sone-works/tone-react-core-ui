@@ -11,7 +11,11 @@ const defaultBoxStyle: React.CSSProperties = {
   padding: '1em',
 }
 
-export default function Box({ className, style = defaultBoxStyle }: IBoxProps) {
+export default function Box({
+  children,
+  className,
+  style = defaultBoxStyle,
+}: IBoxProps) {
   return (
     <div className={className} style={style}>
       {children}
