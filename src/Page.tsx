@@ -2,6 +2,7 @@
 
 import { useUserData } from '@sone-dao/tone-react-user-controller'
 import React from 'react'
+import styles from './Page.module.scss'
 
 interface IPageProps {
   children?: React.ReactNode
@@ -11,15 +12,11 @@ interface IPageProps {
   //authLogic?: Function
 }
 
-const defaultPageStyle: React.CSSProperties = {
-  padding: '1em',
-}
-
 export default function Page({
   children,
   admin = [],
-  style = defaultPageStyle,
-  className,
+  style = {},
+  className = styles.page,
 }: IPageProps) {
   const { user } = useUserData()
 

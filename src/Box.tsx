@@ -1,20 +1,17 @@
 import React from 'react'
+import styles from './Box.module.scss'
 
 interface IBoxProps {
   children?: React.ReactNode
   className?: string
   style?: React.CSSProperties
-}
-
-const defaultBoxStyle: React.CSSProperties = {
-  fontSize: '1em',
-  padding: '1em',
+  noStyle?: boolean
 }
 
 export default function Box({
   children,
-  className,
-  style = defaultBoxStyle,
+  className = styles.box,
+  style = {},
 }: IBoxProps) {
   return (
     <div className={className} style={style}>
