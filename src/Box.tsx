@@ -1,9 +1,9 @@
 import React from 'react'
 
 interface IBoxProps {
-  children: React.ReactNode
-  className: string
-  style: React.CSSProperties
+  children?: React.ReactNode
+  className?: string
+  style?: React.CSSProperties
 }
 
 const defaultBoxStyle: React.CSSProperties = {
