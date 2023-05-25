@@ -9,7 +9,7 @@ interface IPageProps {
   admin?: string[]
   style?: React.CSSProperties
   className?: string
-  hideUi: boolean
+  hideUi?: boolean
   //authLogic?: Function
 }
 
