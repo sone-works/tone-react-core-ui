@@ -9,7 +9,6 @@ interface IPageProps {
   admin?: string[]
   style?: React.CSSProperties
   className?: string
-  hideUi?: boolean
   //authLogic?: Function
 }
 
@@ -18,21 +17,8 @@ export default function Page({
   admin = [],
   style = {},
   className = styles.page,
-  hideUi = false,
 }: IPageProps) {
   const { user } = useUserData()
-
-  document
-    .querySelector('html')
-    ?.style.setProperty('--body-display', hideUi ? 'flex' : 'grid')
-
-  document
-    .querySelector('html')
-    ?.style.setProperty('--helmet-display', hideUi ? 'none' : 'flex')
-
-  document
-    .querySelector('html')
-    ?.style.setProperty('--sidebar-display', hideUi ? 'none' : 'flex')
 
   if (admin.length) {
     if (!hasAdminRequirement()) return <div>Not authorized!</div>
