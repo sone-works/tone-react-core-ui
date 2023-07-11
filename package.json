@@ -49,7 +49,6 @@
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "@sone-dao/sone-react-utils": "^1.0.1",
     "@sone-dao/tone-react-api": "^0.3.0",
     "@sone-dao/tone-react-user-controller": "^0.7.1",
     "next": "^13.4.3",
