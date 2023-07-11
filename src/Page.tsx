@@ -1,7 +1,7 @@
 'use client'
 
 import { useUserData } from '@sone-dao/tone-react-user-controller'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Page.module.scss'
 
 interface IPageProps {
@@ -18,16 +18,20 @@ export default function Page({
   style = {},
   className = styles.page,
 }: IPageProps) {
+  const [authorized, setAuthorized] = useState<boolean>(false)
+
   const { user } = useUserData()
 
-  if (admin.length) {
-    if (!hasAdminRequirement()) return <div>Not authorized!</div>
-  }
+  useEffect(() => {
+    admin.length && !hasAdminRequirement() && setAuthorized(false)
+  }, [])
 
-  return (
+  return authorized ? (
     <div className={className} style={style}>
       {children}
     </div>
+  ) : (
+    <div>Not authorized!</div>
   )
 
   function hasAdminRequirement() {
