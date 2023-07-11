@@ -1,7 +1,6 @@
 'use client'
 
-import { useUserData } from '@sone-dao/tone-react-user-controller'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './Page.module.scss'
 
 interface IPageProps {
@@ -20,11 +19,11 @@ export default function Page({
 }: IPageProps) {
   const [authorized, setAuthorized] = useState<boolean>(true)
 
-  const { user } = useUserData()
+  /*const { user } = useUserData()
 
   useEffect(() => {
     admin.length && !hasAdminRequirement() && setAuthorized(false)
-  }, [])
+  }, [])*/
 
   return authorized ? (
     <div className={className} style={style}>
@@ -34,7 +33,7 @@ export default function Page({
     <div>Not authorized!</div>
   )
 
-  function hasAdminRequirement() {
+  /*function hasAdminRequirement() {
     let authorized = false
 
     admin.forEach((typeNeeded) => {
@@ -42,5 +41,5 @@ export default function Page({
     })
 
     return authorized
-  }
+  }*/
 }
