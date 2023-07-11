@@ -18,7 +18,7 @@ export default function Page({
   style = {},
   className = styles.page,
 }: IPageProps) {
-  const [authorized, setAuthorized] = useState<boolean>(false)
+  const [authorized, setAuthorized] = useState<boolean>(true)
 
   const { user } = useUserData()
 
