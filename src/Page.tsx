@@ -25,6 +25,10 @@ export default function Page({
     privs.length ? checkUserPrivs(privs) : setAuthorized(true)
   }, [])
 
+  useEffect(() => {
+    console.log({ isAuthorized })
+  }, [isAuthorized])
+
   return isAuthorized ? (
     <div className={className} style={style}>
       {children}
