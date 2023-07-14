@@ -6,7 +6,6 @@
   "types": "dist/index.d.ts",
   "repository": "https://github.com/sone-dao/tone-react-core-ui.git",
   "author": "Sone DAO <dev@sone.works>",
-  "license": "MIT",
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "rollup -c",

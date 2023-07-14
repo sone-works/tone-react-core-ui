@@ -34,9 +34,12 @@ export default function Page({
   )
 
   async function checkUserPrivs(privs: string[]) {
+    console.log('check privs...')
     let authorized = false
 
     const result = await api.users.self()
+
+    console.log(result)
 
     const userPrivs: string[] = result.user.privs
 
