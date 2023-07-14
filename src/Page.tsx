@@ -34,9 +34,19 @@ export default function Page({
   )
 
   async function checkUserPrivs(privs: string[]) {
+    console.log('checking privs...')
     const result = await api.users.self()
     const userPrivs: string[] = result.user.privs
 
-    userPrivs.map((priv) => privs.includes(priv) && setAuthorized(true))
+    console.log({ result, userPrivs })
+
+    userPrivs.map((priv) => {
+      console.log(`checking ${priv}...`)
+
+      if (privs.includes(priv)) {
+        console.log('match!!')
+        setAuthorized(true)
+      }
+    })
   }
 }
