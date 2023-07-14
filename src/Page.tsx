@@ -1,45 +1,49 @@
 'use client'
 
-import React, { useState } from 'react'
+import useToneApi from '@sone-dao/tone-react-api'
+import React, { useEffect, useState } from 'react'
 import styles from './Page.module.scss'
 
 interface IPageProps {
   children?: React.ReactNode
-  admin?: string[]
+  privs?: string[]
   style?: React.CSSProperties
   className?: string
-  //authLogic?: Function
 }
 
 export default function Page({
   children,
-  admin = [],
+  privs = [],
   style = {},
   className = styles.page,
 }: IPageProps) {
-  const [authorized, setAuthorized] = useState<boolean>(true)
+  const [isAuthorized, setAuthorized] = useState<boolean>(false)
 
-  /*const { user } = useUserData()
+  const api = useToneApi()
 
   useEffect(() => {
-    admin.length && !hasAdminRequirement() && setAuthorized(false)
-  }, [])*/
+    privs.length ? checkUserPrivs(privs) : setAuthorized(true)
+  }, [])
 
-  return authorized ? (
+  return isAuthorized ? (
     <div className={className} style={style}>
       {children}
     </div>
   ) : (
-    <div>Not authorized!</div>
+    <div />
   )
 
-  /*function hasAdminRequirement() {
+  async function checkUserPrivs(privs: string[]) {
     let authorized = false
 
-    admin.forEach((typeNeeded) => {
-      if (user.roles?.admin?.includes(typeNeeded)) authorized = true
+    const result = await api.users.self()
+
+    const userPrivs: string[] = result.user.privs
+
+    userPrivs.forEach((priv) => {
+      if (privs.includes(priv)) authorized = true
     })
 
-    return authorized
-  }*/
+    authorized && setAuthorized(true)
+  }
 }
