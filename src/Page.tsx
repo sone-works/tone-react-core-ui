@@ -25,10 +25,6 @@ export default function Page({
     privs.length ? checkUserPrivs(privs) : setAuthorized(true)
   }, [])
 
-  useEffect(() => {
-    console.log({ isAuthorized })
-  }, [isAuthorized])
-
   return isAuthorized ? (
     <div className={className} style={style}>
       {children}
@@ -38,19 +34,9 @@ export default function Page({
   )
 
   async function checkUserPrivs(privs: string[]) {
-    console.log('checking privs...')
     const result = await api.users.self()
     const userPrivs: string[] = result.user.privs
 
-    console.log({ result, userPrivs })
-
-    userPrivs.map((priv) => {
-      console.log(`checking ${priv}...`)
-
-      if (privs.includes(priv)) {
-        console.log('match!!')
-        setAuthorized(true)
-      }
-    })
+    userPrivs.map((priv) => privs.includes(priv) && setAuthorized(true))
   }
 }
