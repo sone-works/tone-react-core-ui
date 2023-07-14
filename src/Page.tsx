@@ -34,19 +34,9 @@ export default function Page({
   )
 
   async function checkUserPrivs(privs: string[]) {
-    console.log('check privs...')
-    let authorized = false
-
     const result = await api.users.self()
-
-    console.log(result)
-
     const userPrivs: string[] = result.user.privs
 
-    userPrivs.forEach((priv) => {
-      if (privs.includes(priv)) authorized = true
-    })
-
-    authorized && setAuthorized(true)
+    userPrivs.map((priv) => privs.includes(priv) && setAuthorized(true))
   }
 }
