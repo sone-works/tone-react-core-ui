@@ -22,6 +22,8 @@ export default function Page({
   const api = useToneApi()
 
   useEffect(() => {
+    //Check for tokens & stuff when user first drops onto page here
+
     privs.length ? checkUserPrivs(privs) : setAuthorized(true)
   }, [])
 
