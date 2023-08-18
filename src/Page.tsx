@@ -47,7 +47,7 @@ export default function Page({
 
   return (
     <div style={style} className={classString}>
-      <div style={{ height: '100%', width: '100%' }}>{children}</div>
+      {children}
     </div>
   )
 }
