@@ -6,10 +6,13 @@
 .pageLoading {
   align-items: center;
   display: flex;
-  font-size: 2rem;
   height: 100%;
   justify-content: center;
   width: 100%;
+
+  i {
+    font-size: 4rem;
+  }
 }
 
 .pageUnauthorized {
@@ -22,6 +25,7 @@
   width: 100%;
 
   i {
-    font-size: 2rem;
+    font-size: 4rem;
+    margin-bottom: 1rem;
   }
 }

@@ -28,7 +28,7 @@ export default function Page({
     return (
       <div style={style} className={classString}>
         <div className={styles.pageLoading}>
-          <i className="fa-fw fa-pulse fa-sharp fa-light fa-music-note" />
+          <i className="fa-fw fa-pulse fa-sharp fa-solid fa-music-note" />
         </div>
       </div>
     )
