@@ -1,44 +1,53 @@
 'use client'
 
-import useToneApi from '@sone-dao/tone-react-api'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './Page.module.scss'
 
 interface IPageProps {
   children?: React.ReactNode
-  privs?: string[]
+  isLoading?: boolean
+  isAuthorized?: boolean
   style?: React.CSSProperties
   className?: string
+  additionalClasses?: []
 }
 
 export default function Page({
   children,
-  privs = [],
-  style = {},
+  isLoading = false,
+  isAuthorized = true,
+  style,
   className = styles.page,
+  additionalClasses = [],
 }: IPageProps) {
-  const [isAuthorized, setAuthorized] = useState<boolean>(false)
+  const elementClasses: string[] = [className, ...additionalClasses]
 
-  const api = useToneApi()
+  const classString: string = elementClasses.toString().replace(/,/g, ' ')
 
-  useEffect(() => {
-    //Check for tokens & stuff when user first drops onto page here
+  if (isLoading)
+    return (
+      <div style={style} className={classString}>
+        <div className={styles.pageLoading}>
+          <i className="fa-fw fa-pulse fa-sharp fa-light fa-music-note" />
+        </div>
+      </div>
+    )
 
-    privs.length ? checkUserPrivs(privs) : setAuthorized(true)
-  }, [])
+  if (!isAuthorized)
+    return (
+      <div style={style} className={classString}>
+        <div className={styles.pageUnauthorized}>
+          <i className="fa-fw fa-sharp fa-light fa-face-dotted" />
+          <p>
+            Well this is a little awkward, but you're not allowed to be here...
+          </p>
+        </div>
+      </div>
+    )
 
-  return isAuthorized ? (
-    <div className={className} style={style}>
+  return (
+    <div className={classString} style={style}>
       {children}
     </div>
-  ) : (
-    <div />
   )
-
-  async function checkUserPrivs(privs: string[]) {
-    const result = await api.users.self()
-    const userPrivs: string[] = result.user.privs
-
-    userPrivs.map((priv) => privs.includes(priv) && setAuthorized(true))
-  }
 }
