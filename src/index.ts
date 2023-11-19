@@ -1,5 +1,5 @@
-import Box from './Box'
-import Page from './Page'
-import Section from './Section'
+import Box from './components/Box'
+import Page from './components/Page'
+import Section from './components/Section'
 
-export { Page, Box, Section }
+export { Box, Page, Section }
