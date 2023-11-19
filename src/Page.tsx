@@ -7,8 +7,6 @@ interface IPageProps {
   isLoading?: boolean
   isAuthorized?: boolean
   style?: React.CSSProperties
-  className?: string
-  additionalClasses?: []
 }
 
 export default function Page({
@@ -16,20 +14,17 @@ export default function Page({
   isLoading = false,
   isAuthorized = true,
   style,
-  additionalClasses = [],
 }: IPageProps) {
-  if (isLoading)
+  /*if (isLoading)
     return (
-      <div style={style}>
-        <div>
+      <div className="h-full w-full" style={style}>
           <i className="fa-fw fa-pulse fa-sharp fa-solid fa-music-note" />
-        </div>
       </div>
-    )
+    )*/
 
   if (!isAuthorized)
     return (
-      <div style={style}>
+      <div className="h-full w-full p-4" style={style}>
         <div>
           <i className="fa-fw fa-sharp fa-light fa-face-dotted" />
           <p>
@@ -39,5 +34,9 @@ export default function Page({
       </div>
     )
 
-  return <div style={style}>{children}</div>
+  return (
+    <div className="h-full w-full p-4" style={style}>
+      {children}
+    </div>
+  )
 }
