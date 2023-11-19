@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import styles from './Page.module.scss'
 
 interface IPageProps {
   children?: React.ReactNode
@@ -17,17 +16,12 @@ export default function Page({
   isLoading = false,
   isAuthorized = true,
   style,
-  className = styles.page,
   additionalClasses = [],
 }: IPageProps) {
-  const elementClasses: string[] = [className, ...additionalClasses]
-
-  const classString: string = elementClasses.toString().replace(/,/g, ' ')
-
   if (isLoading)
     return (
-      <div style={style} className={classString}>
-        <div className={styles.pageLoading}>
+      <div style={style}>
+        <div>
           <i className="fa-fw fa-pulse fa-sharp fa-solid fa-music-note" />
         </div>
       </div>
@@ -35,8 +29,8 @@ export default function Page({
 
   if (!isAuthorized)
     return (
-      <div style={style} className={classString}>
-        <div className={styles.pageUnauthorized}>
+      <div style={style}>
+        <div>
           <i className="fa-fw fa-sharp fa-light fa-face-dotted" />
           <p>
             Well this is a little awkward, but you're not allowed to be here...
@@ -45,9 +39,5 @@ export default function Page({
       </div>
     )
 
-  return (
-    <div style={style} className={classString}>
-      {children}
-    </div>
-  )
+  return <div style={style}>{children}</div>
 }
