@@ -6,6 +6,7 @@ interface IPageProps {
   children?: React.ReactNode
   isLoading?: boolean
   isAuthorized?: boolean
+  additionalClasses?: string[]
   style?: React.CSSProperties
 }
 
@@ -13,6 +14,7 @@ export default function Page({
   children,
   isLoading = false,
   isAuthorized = true,
+  additionalClasses = [],
   style,
 }: IPageProps) {
   /*if (isLoading)
@@ -22,7 +24,7 @@ export default function Page({
       </div>
     )*/
 
-  if (!isAuthorized)
+  /*if (!isAuthorized)
     return (
       <div className="h-full w-full p-4" style={style}>
         <div>
@@ -32,10 +34,16 @@ export default function Page({
           </p>
         </div>
       </div>
-    )
+    )*/
 
   return (
-    <div className="h-full w-full p-4" style={style}>
+    <div
+      className={
+        'flex flex-col h-full p-4 w-full' +
+        additionalClasses.toString().replace(/,/g, ' ')
+      }
+      style={style}
+    >
       {children}
     </div>
   )
