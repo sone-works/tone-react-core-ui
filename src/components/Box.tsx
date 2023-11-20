@@ -1,10 +1,15 @@
-import React from 'react'
+import { CSSProperties, ReactNode } from 'react'
 
-interface IBoxProps {
-  children?: React.ReactNode
-  style?: React.CSSProperties
+type BoxProps = {
+  children?: ReactNode
+  className?: string
+  style?: CSSProperties
 }
 
-export default function Box({ children, style = {} }: IBoxProps) {
-  return <div style={style}>{children}</div>
+export default function Box({ children, className, style }: BoxProps) {
+  return (
+    <div className={className} style={style}>
+      {children}
+    </div>
+  )
 }

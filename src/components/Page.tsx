@@ -1,22 +1,20 @@
-'use client'
+import { CSSProperties, ReactNode } from 'react'
 
-import React from 'react'
-
-interface IPageProps {
-  children?: React.ReactNode
+type PageProps = {
+  children?: ReactNode
   isLoading?: boolean
   isAuthorized?: boolean
-  additionalClasses?: string[]
-  style?: React.CSSProperties
+  additionalClasses?: string
+  style?: CSSProperties
 }
 
 export default function Page({
   children,
   isLoading = false,
   isAuthorized = true,
-  additionalClasses = [],
+  additionalClasses,
   style,
-}: IPageProps) {
+}: PageProps) {
   /*if (isLoading)
     return (
       <div className="h-full w-full" style={style}>
@@ -38,10 +36,7 @@ export default function Page({
 
   return (
     <div
-      className={
-        'flex flex-col h-full p-4 w-full' +
-        additionalClasses.toString().replace(/,/g, ' ')
-      }
+      className={'flex flex-col h-full p-4 w-full' + additionalClasses}
       style={style}
     >
       {children}
