@@ -6,6 +6,8 @@ type InputProps = {
   value?: string
   defaultValue?: string
   setValue?: Function
+  isInvalid?: boolean
+  errorMessage?: string
   isDisabled?: boolean
   className?: string
   style?: CSSProperties
@@ -18,6 +20,8 @@ export default function Input({
   value,
   setValue = () => {},
   defaultValue,
+  isInvalid,
+  errorMessage,
   isDisabled,
   className,
   style,
@@ -31,12 +35,15 @@ export default function Input({
       labelPlacement="inside"
       onChange={(e) => setValue(e.target.value)}
       defaultValue={defaultValue}
+      isInvalid={isInvalid}
+      errorMessage={errorMessage}
       isDisabled={isDisabled}
       className={className}
       classNames={{
         label: 'font-header text-sm py-1',
         input: 'font-content text-base',
         innerWrapper: 'flex items-center',
+        errorMessage: 'font-header text-base',
       }}
       style={style}
       startContent={startContent}
