@@ -32,6 +32,7 @@ export default function Input({
     <NextUIInput
       label={label}
       value={value}
+      radius="lg"
       labelPlacement="inside"
       onChange={(e) => setValue(e.target.value)}
       defaultValue={defaultValue}

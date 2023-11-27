@@ -20,7 +20,8 @@ export default function Button({
   isSubmit,
   onClick = () => {},
 }: ButtonProps) {
-  const buttonClasses = 'font-header rounded-[20px] text-2xl'
+  const buttonClasses =
+    'font-content text-black text-base font-medium rounded-xl'
 
   return (
     <NextUIButton

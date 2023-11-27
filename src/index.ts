@@ -1,3 +1,4 @@
+import Avatar from './components/Avatar'
 import Box from './components/Box'
 import Button from './components/Button'
 import Carousel from './components/Carousel'
@@ -10,6 +11,7 @@ import SixDigitInput from './components/SixDigitInput'
 import Textarea from './components/Textarea'
 
 export {
+  Avatar,
   Box,
   Button,
   Carousel,
