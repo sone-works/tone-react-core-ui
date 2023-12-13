@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
+    "@sone-dao/sone-react-utils": "^1.0.1",
     "framer-motion": "^10.16.5"
   },
   "devDependencies": {

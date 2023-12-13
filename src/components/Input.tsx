@@ -3,6 +3,8 @@ import { CSSProperties } from 'react'
 
 type InputProps = {
   label?: string
+  placeholder?: string
+  description?: string
   value?: string
   defaultValue?: string
   setValue?: Function
@@ -10,13 +12,17 @@ type InputProps = {
   errorMessage?: string
   isDisabled?: boolean
   className?: string
+  additionalClasses?: string
   style?: CSSProperties
   startContent?: any
   endContent?: any
+  variant?: 'flat' | 'bordered' | 'underlined' | 'faded'
 }
 
 export default function Input({
   label,
+  placeholder,
+  description,
   value,
   setValue = () => {},
   defaultValue,
@@ -24,13 +30,17 @@ export default function Input({
   errorMessage,
   isDisabled,
   className,
+  additionalClasses,
   style,
   startContent,
   endContent,
+  variant,
 }: InputProps) {
   return (
     <NextUIInput
       label={label}
+      placeholder={placeholder}
+      description={description}
       value={value}
       radius="lg"
       labelPlacement="inside"
@@ -39,8 +49,11 @@ export default function Input({
       isInvalid={isInvalid}
       errorMessage={errorMessage}
       isDisabled={isDisabled}
-      className={className}
+      className={
+        additionalClasses ? className + ' ' + additionalClasses : className
+      }
       classNames={{
+        base: 'placeholder-gray-100',
         label: 'font-header text-sm py-1',
         input: 'font-content text-base',
         innerWrapper: 'flex items-center',
@@ -49,6 +62,7 @@ export default function Input({
       style={style}
       startContent={startContent}
       endContent={endContent}
+      variant={variant}
     />
   )
 }

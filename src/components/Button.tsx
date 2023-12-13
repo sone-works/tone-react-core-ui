@@ -1,8 +1,8 @@
 import { Button as NextUIButton } from '@nextui-org/react'
-import { CSSProperties, ReactNode } from 'react'
+import { CSSProperties } from 'react'
 
 type ButtonProps = {
-  children?: ReactNode
+  children?: any
   className?: string
   additionalClasses?: string
   style?: CSSProperties

@@ -6,7 +6,9 @@ type TextareaProps = {
   value?: string
   setValue?: Function
   isDisabled?: boolean
+  height?: string
   className?: string
+  additionalClasses?: string
   style?: CSSProperties
 }
 
@@ -16,6 +18,7 @@ export default function Textarea({
   setValue = () => {},
   isDisabled,
   className,
+  additionalClasses,
   style,
 }: TextareaProps) {
   return (
@@ -25,7 +28,9 @@ export default function Textarea({
       value={value}
       onChange={(e) => setValue(e.target.value)}
       isDisabled={isDisabled}
-      className={className}
+      className={
+        additionalClasses ? `${className} ${additionalClasses}` : className
+      }
       classNames={{
         label: 'font-header text-sm py-1',
         input: 'font-content text-base',
