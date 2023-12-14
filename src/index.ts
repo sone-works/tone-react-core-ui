@@ -11,6 +11,7 @@ import Radio from './components/Radio'
 import RadioGroup from './components/RadioGroup'
 import Section from './components/Section'
 import SixDigitInput from './components/SixDigitInput'
+import Slider from './components/Slider'
 import Switch from './components/Switch'
 import Tab from './components/Tab'
 import Tabs from './components/Tabs'
@@ -30,6 +31,7 @@ export {
   RadioGroup,
   Section,
   SixDigitInput,
+  Slider,
   Switch,
   Tab,
   Tabs,
