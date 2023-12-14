@@ -1,6 +1,6 @@
-import { Slider as NextUISlider } from '@nextui-org/react'
+import ReactSlider from 'react-slider'
 
-type SliderProps = {
+/*type SliderProps = {
   classNames?: {
     base?: string
     labelWrapper?: string
@@ -30,46 +30,38 @@ type SliderProps = {
   onChange?: Function
   onChangeEnd?: Function
   renderThumb?: Function
+}*/
+
+type SliderProps = {
+  className?: string
+  trackClassName?: string
+  thumbClassName?: string
+  min?: number
+  max?: number
+  step?: number
+  renderThumb?: Function
 }
 
 const F = () => {}
 
 export default function Slider({
-  classNames,
-  label,
-  size,
-  radius,
+  className,
+  trackClassName,
+  thumbClassName,
+  min,
+  max,
   step,
-  maxValue,
-  minValue,
-  defaultValue,
-  startContent,
-  endContent,
-  hideValue,
-  hideThumb,
-  value,
-  onChange = F,
-  onChangeEnd = F,
   renderThumb = F,
 }: SliderProps) {
   return (
-    <NextUISlider
-      classNames={classNames}
-      label={label}
-      size={size}
-      radius={radius}
+    <ReactSlider
+      className={className}
+      trackClassName={trackClassName}
+      thumbClassName={thumbClassName}
+      min={min}
+      max={max}
       step={step}
-      maxValue={maxValue}
-      minValue={minValue}
-      defaultValue={defaultValue}
-      startContent={startContent}
-      endContent={endContent}
-      hideValue={hideValue}
-      hideThumb={hideThumb}
-      value={value}
-      onChange={(value) => onChange(value)}
-      onChangeEnd={(value) => onChangeEnd(value)}
-      renderThumb={(props) => renderThumb(props)}
+      renderThumb={(props, state) => renderThumb(props, state)}
     />
   )
 }
