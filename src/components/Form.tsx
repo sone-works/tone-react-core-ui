@@ -1,10 +1,10 @@
-import { CSSProperties, ReactNode } from 'react'
+import { CSSProperties, FormEvent, ReactNode } from 'react'
 
 type FormProps = {
   children?: ReactNode
   className?: string
   style?: CSSProperties
-  onSubmit?: Function
+  onSubmit?: (e: FormEvent<HTMLFormElement>) => void
 }
 
 export default function Form({

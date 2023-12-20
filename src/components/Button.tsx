@@ -1,41 +1,30 @@
-import { Button as NextUIButton } from '@nextui-org/react'
-import { CSSProperties } from 'react'
+import { ReactNode } from 'react'
 
 type ButtonProps = {
-  children?: any
+  children?: ReactNode
   className?: string
-  additionalClasses?: string
-  style?: CSSProperties
-  isLoading?: boolean
-  isSubmit?: boolean
   onClick?: Function
+  isDisabled?: boolean
 }
 
 export default function Button({
   children,
-  isLoading,
   className,
-  additionalClasses,
-  style,
-  isSubmit,
   onClick = () => {},
+  isDisabled,
 }: ButtonProps) {
-  const buttonClasses =
-    'font-content text-black text-base font-medium rounded-xl'
-
   return (
-    <NextUIButton
-      size="lg"
-      isLoading={isLoading}
-      className={
-        className ||
-        buttonClasses + (additionalClasses && ' ' + additionalClasses)
-      }
-      style={style}
-      type={isSubmit ? 'submit' : 'button'}
-      onClick={(e) => onClick(e)}
-    >
-      {children}
-    </NextUIButton>
+    <div className={className}>
+      <button
+        className="flex items-center justify-center w-full p-1 bg-global text-global rounded-xl font-content text-lg"
+        onClick={(e) => onClick(e)}
+        disabled={isDisabled}
+        style={{ opacity: !isDisabled ? 1 : 0.5 }}
+      >
+        <div className="border-2 border-global p-2 rounded-xl w-full">
+          {children}
+        </div>
+      </button>
+    </div>
   )
 }
