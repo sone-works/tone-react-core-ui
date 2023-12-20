@@ -6,6 +6,7 @@ type InputProps = {
   name?: string
   startContent?: any
   isDisabled?: boolean
+  placeholder?: string
 }
 
 export default function Input({
@@ -16,6 +17,7 @@ export default function Input({
   name,
   startContent,
   isDisabled,
+  placeholder,
 }: InputProps) {
   return (
     <div className={'group' + className && ' ' + className}>
@@ -31,11 +33,12 @@ export default function Input({
         <div className="flex items-center w-full">
           {startContent && <div className="p-1">{startContent}</div>}
           <input
-            className="w-full text-global-flipped bg-transparent outline-none font-content"
+            className="w-full text-global-flipped bg-transparent outline-none font-content placeholder:text-global-flipped placeholder:opacity-30"
             value={value}
             name={name}
             onChange={(e) => setValue(e.target.value)}
             disabled={isDisabled}
+            placeholder={placeholder}
           />
         </div>
       </div>
