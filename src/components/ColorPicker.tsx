@@ -19,23 +19,27 @@ export default function ColorPicker({
     <div className={className}>
       <div className="flex items-center border-2 border-global-flipped rounded-xl w-full">
         <div
-          className="flex items-center rounded-l-xl cursor-pointer mr-1 border-r-2 border-global-flipped"
-          style={{
-            backgroundColor: value,
-            height: '3rem',
-            width: '3rem',
-          }}
+          className="flex items-center rounded-l-xl cursor-pointer border-global-flipped p-2"
           onClick={() => colorPickerElement.current?.click()}
         >
-          <input
-            className="opacity-0"
-            type="color"
-            name={name}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            ref={colorPickerElement}
-            style={{ height: 0, width: 0 }}
-          />
+          <div
+            className="flex items-center rounded-full cursor-pointer border-2 border-global-flipped"
+            style={{
+              backgroundColor: value,
+              height: '2rem',
+              width: '2rem',
+            }}
+          >
+            <input
+              className="opacity-0"
+              type="color"
+              name={name}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              ref={colorPickerElement}
+              style={{ height: 0, width: 0 }}
+            />
+          </div>
         </div>
         <input
           className="w-full text-global-flipped bg-transparent outline-none font-content px-2 py-1"
