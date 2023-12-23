@@ -8,6 +8,7 @@ type TextareaProps = {
   isDisabled?: boolean
   className?: string
   style?: CSSProperties
+  placeholder?: string
 }
 
 export default function Textarea({
@@ -18,6 +19,7 @@ export default function Textarea({
   isDisabled,
   className,
   style,
+  placeholder,
 }: TextareaProps) {
   return (
     <div className={'group' + className && ' ' + className} style={style}>
@@ -29,10 +31,11 @@ export default function Textarea({
         )}
         <textarea
           name={name}
-          className="w-full text-global-flipped bg-transparent outline-none font-content resize-none"
+          className="w-full text-global-flipped bg-transparent outline-none font-content resize-none placeholder:text-global-flipped placeholder:opacity-30"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           disabled={isDisabled}
+          placeholder={placeholder}
         />
       </div>
     </div>
