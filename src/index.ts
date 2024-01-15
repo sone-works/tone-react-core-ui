@@ -5,6 +5,7 @@ import Carousel from './components/Carousel'
 import CarouselItem from './components/CarouselItem'
 import Chip from './components/Chip'
 import ColorPicker from './components/ColorPicker'
+import FileSelect from './components/FileSelect'
 import Form from './components/Form'
 import Input from './components/Input'
 import Page from './components/Page'
@@ -25,6 +26,7 @@ export {
   CarouselItem,
   Chip,
   ColorPicker,
+  FileSelect,
   Form,
   Input,
   Page,

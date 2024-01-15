@@ -2,6 +2,10 @@ import { useRef } from 'react'
 
 type ColorPickerProps = {
   className?: string
+  classNames?: {
+    wrapper?: string
+    input?: string
+  }
   name?: string
   defaultColor?: string
   value?: string
@@ -10,6 +14,7 @@ type ColorPickerProps = {
 
 export default function ColorPicker({
   className,
+  classNames,
   name,
   value,
   setValue = () => {},
@@ -17,7 +22,12 @@ export default function ColorPicker({
   const colorPickerElement = useRef<HTMLInputElement>(null)
   return (
     <div className={className}>
-      <div className="flex items-center border-2 border-global-flipped rounded-xl w-full">
+      <div
+        className={
+          classNames?.wrapper ||
+          'flex items-center border-2 border-global-flipped rounded-xl w-full'
+        }
+      >
         <div
           className="flex items-center rounded-l-xl cursor-pointer border-global-flipped p-2"
           onClick={() => colorPickerElement.current?.click()}
@@ -42,7 +52,10 @@ export default function ColorPicker({
           </div>
         </div>
         <input
-          className="w-full text-global-flipped bg-transparent outline-none font-content px-2 py-1"
+          className={
+            classNames?.input ||
+            'w-full text-global-flipped bg-transparent outline-none font-content px-2 py-1'
+          }
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
