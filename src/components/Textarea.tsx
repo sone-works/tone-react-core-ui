@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react'
+import { CSSProperties, useLayoutEffect, useRef } from 'react'
 import { useDarkMode } from 'usehooks-ts'
 
 type TextareaProps = {
@@ -38,6 +38,7 @@ export default function Textarea({
   isDisabled,
   placeholder,
 }: TextareaProps) {
+  const textAreaElement = useRef<HTMLTextAreaElement>(null)
   const { isDarkMode } = useDarkMode()
 
   const isDark = dark || isDarkMode
@@ -49,10 +50,19 @@ export default function Textarea({
 
   const colors = {
     ...namespaceColors,
-    background: namespaceColors.lighter,
-    text: namespaceColors.darker,
-    border: namespaceColors.darker,
+    background: !isDark ? namespaceColors.lighter : namespaceColors.darker,
+    text: !isDark ? namespaceColors.darker : namespaceColors.lighter,
+    border: !isDark ? namespaceColors.darker : namespaceColors.lighter,
   }
+
+  useLayoutEffect(() => {
+    if (textAreaElement.current) {
+      textAreaElement.current.style.setProperty(
+        '--placeholder-color',
+        !isDark ? namespaceColors.darker : namespaceColors.lighter
+      )
+    }
+  })
 
   return (
     <div className={'group' + className && ' ' + className} style={style}>
