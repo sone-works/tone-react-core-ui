@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { CSSProperties, useRef } from 'react'
 
 type ColorPickerProps = {
   className?: string
@@ -6,6 +6,12 @@ type ColorPickerProps = {
     wrapper?: string
     input?: string
   }
+  style?: CSSProperties
+  styles?: {
+    wrapper?: CSSProperties
+    input?: CSSProperties
+  }
+  styleNamespace?: string
   name?: string
   defaultColor?: string
   value?: string
@@ -15,26 +21,50 @@ type ColorPickerProps = {
 export default function ColorPicker({
   className,
   classNames,
+  style,
+  styles,
+  styleNamespace,
   name,
   value,
   setValue = () => {},
 }: ColorPickerProps) {
   const colorPickerElement = useRef<HTMLInputElement>(null)
+
+  const namespaceColors = {
+    darker: `var(--${styleNamespace}-darker)`,
+    lighter: `var(--${styleNamespace}-lighter)`,
+  }
+
+  const colors = {
+    ...namespaceColors,
+    background: namespaceColors.lighter,
+    text: namespaceColors.darker,
+    border: namespaceColors.darker,
+  }
+
   return (
-    <div className={className}>
+    <div className={className} style={style}>
       <div
         className={
-          classNames?.wrapper ||
-          'flex items-center border-2 border-global-flipped rounded-xl w-full'
+          classNames?.wrapper || 'flex items-center border-2 rounded-xl w-full'
+        }
+        style={
+          styles?.wrapper || {
+            backgroundColor: colors.background,
+            borderColor: colors.darker,
+            color: colors.text,
+          }
         }
       >
         <div
-          className="flex items-center rounded-l-xl cursor-pointer border-global-flipped p-2"
+          className="flex items-center rounded-l-xl cursor-pointer p-2"
           onClick={() => colorPickerElement.current?.click()}
+          style={{ borderColor: colors.darker }}
         >
           <div
-            className="flex items-center rounded-full cursor-pointer border-2 border-global-flipped"
+            className="flex items-center rounded-full cursor-pointer border-2"
             style={{
+              borderColor: colors.darker,
               backgroundColor: value,
               height: '2rem',
               width: '2rem',
@@ -54,8 +84,9 @@ export default function ColorPicker({
         <input
           className={
             classNames?.input ||
-            'w-full text-global-flipped bg-transparent outline-none font-content px-2 py-1'
+            'w-full bg-transparent outline-none font-content px-2 py-1'
           }
+          style={styles?.input}
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />

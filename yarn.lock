@@ -2035,10 +2035,15 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@sone-dao/sone-react-utils@^1.0.1":
+"@sone-dao/sone-react-utils@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sone-dao/sone-react-utils/-/sone-react-utils-1.0.1.tgz#81da4c7e8c83115b66e4b4b875f6e77554770328"
   integrity sha512-48hho0n41lqMY5NByAqnMPy11vVN5xXOYwTapdOvgRHVtVZVboA5U/zRJcLEzbvTN/P8w6gzCuqXfgh/xyTHiA==
+
+"@sone-dao/tone-react-css-utils@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@sone-dao/tone-react-css-utils/-/tone-react-css-utils-0.2.1.tgz#558faefc428abf6e8b2ac258a1db3cc7a93074e2"
+  integrity sha512-eoGEWoDyEn6645RjkWpDc8tymvl854JfB6Eg4xETw9Y3cl2uPnEJcTi9uqDZ9F/mA8fojtoalAZ294sVRatMGw==
 
 "@swc/helpers@^0.4.14":
   version "0.4.36"
@@ -5179,6 +5184,11 @@ use-sidecar@^1.1.2:
   dependencies:
     detect-node-es "^1.1.0"
     tslib "^2.0.0"
+
+usehooks-ts@^2.9.4:
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/usehooks-ts/-/usehooks-ts-2.9.4.tgz#188c0428b60e37a7fdc599567c10ea44a77e1d11"
+  integrity sha512-VOSEbA+BGGORLttsICowNb5CG0D2/IEoVvMEl9OuuOoQi99W6XuNipo3SPFhWo3Bhdwi0Swj1D+IMQDQB9KrwQ==
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2:
   version "1.0.2"

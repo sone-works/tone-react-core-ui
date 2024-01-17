@@ -1,7 +1,27 @@
+import { CSSProperties } from 'react'
+import { useDarkMode } from 'usehooks-ts'
+
 type InputProps = {
   value?: string
-  setValue?: Function
+  setValue?: (value: string) => void
   className?: string
+  classNames?: {
+    wrapper?: string
+    label?: string
+    innerWrapper?: string
+    startContent?: string
+    input?: string
+  }
+  style?: CSSProperties
+  styles?: {
+    wrapper?: CSSProperties
+    label?: CSSProperties
+    innerWrapper?: CSSProperties
+    startContent?: CSSProperties
+    input?: CSSProperties
+  }
+  styleNamespace?: string
+  dark?: boolean
   label?: string
   name?: string
   startContent?: any
@@ -13,32 +33,78 @@ export default function Input({
   value,
   setValue = () => {},
   className,
+  classNames,
+  style,
+  styles,
+  styleNamespace = 'global',
+  dark,
   label,
   name,
   startContent,
   isDisabled,
   placeholder,
 }: InputProps) {
+  const { isDarkMode } = useDarkMode()
+
+  const isDark = dark || isDarkMode
+
+  const namespaceColors = {
+    darker: `var(--${styleNamespace}-darker)`,
+    lighter: `var(--${styleNamespace}-lighter)`,
+  }
+
+  const colors = {
+    ...namespaceColors,
+    background: namespaceColors.lighter,
+    text: namespaceColors.darker,
+    border: namespaceColors.darker,
+  }
+
   return (
-    <div className={'group' + className && ' ' + className}>
+    <div className={'group' + className && ' ' + className} style={style}>
       <div
-        className="bg-global-flipped rounded-xl px-2 py-1 border-global-flipped border-2"
-        style={{ opacity: isDisabled ? 0.5 : 1 }}
+        className={classNames?.wrapper || 'rounded-xl px-2 py-1 border-2'}
+        style={{
+          opacity: isDisabled ? 0.5 : 1,
+          ...(styles?.wrapper || {
+            backgroundColor: colors.background,
+            borderColor: colors.border,
+            color: colors.text,
+          }),
+        }}
       >
         {label && (
-          <span className="text-global-flipped font-header text-sm">
+          <label
+            className={classNames?.label || 'font-header text-sm'}
+            htmlFor={name}
+            style={styles?.label}
+          >
             {label}
-          </span>
+          </label>
         )}
-        <div className="flex items-center w-full">
-          {startContent && <div className="p-1">{startContent}</div>}
+        <div
+          className={classNames?.innerWrapper || 'flex items-center w-full'}
+          style={styles?.innerWrapper}
+        >
+          {startContent && (
+            <div
+              className={classNames?.startContent || 'p-1'}
+              style={styles?.startContent}
+            >
+              {startContent}
+            </div>
+          )}
           <input
-            className="w-full text-global-flipped bg-transparent outline-none font-content placeholder:text-global-flipped placeholder:opacity-30"
+            className={
+              classNames?.input ||
+              'w-full bg-transparent outline-none font-content placeholder:opacity-30'
+            }
             value={value}
             name={name}
             onChange={(e) => setValue(e.target.value)}
             disabled={isDisabled}
             placeholder={placeholder}
+            style={styles?.input}
           />
         </div>
       </div>
