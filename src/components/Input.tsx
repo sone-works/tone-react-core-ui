@@ -1,9 +1,9 @@
-import { CSSProperties, useLayoutEffect, useRef } from 'react'
+import { CSSProperties, useRef } from 'react'
 import { useDarkMode } from 'usehooks-ts'
 
 type InputProps = {
   value?: string
-  setValue?: (value: string) => void
+  setValue?: Function
   className?: string
   classNames?: {
     wrapper?: string
@@ -62,14 +62,11 @@ export default function Input({
     border: !isDark ? namespaceColors.darker : namespaceColors.lighter,
   }
 
-  useLayoutEffect(() => {
-    if (inputElement.current) {
-      inputElement.current.style.setProperty(
-        '--placeholder-color',
-        !isDark ? namespaceColors.darker : namespaceColors.lighter
-      )
-    }
-  })
+  inputElement.current &&
+    inputElement.current.style.setProperty(
+      '--placeholder-color',
+      !isDark ? namespaceColors.darker : namespaceColors.lighter
+    )
 
   return (
     <div className={'group' + className && ' ' + className} style={style}>
@@ -116,6 +113,7 @@ export default function Input({
             disabled={isDisabled}
             placeholder={placeholder}
             style={styles?.input}
+            ref={inputElement}
           />
         </div>
       </div>
