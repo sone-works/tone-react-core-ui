@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useState } from 'react'
+import { CSSProperties } from 'react'
 import { useDarkMode } from 'usehooks-ts'
 
 type ButtonProps = {
@@ -30,37 +30,25 @@ export default function Button({
   onClick = () => {},
   isDisabled,
 }: ButtonProps) {
-  const namespaceColors = {
-    darker: `var(--${styleNamespace}-darker)`,
-    lighter: `var(--${styleNamespace}-lighter)`,
-  }
-
-  const [colors, setColors] = useState({
-    ...namespaceColors,
-    background: namespaceColors.lighter,
-    text: namespaceColors.darker,
-    border: namespaceColors.darker,
-  })
-
   const { isDarkMode } = useDarkMode()
 
   const isDark = dark || isDarkMode
 
-  useEffect(() => {
-    !isDark
-      ? setColors({
-          ...namespaceColors,
-          background: namespaceColors.darker,
-          text: namespaceColors.lighter,
-          border: namespaceColors.lighter,
-        })
-      : setColors({
-          ...namespaceColors,
-          background: namespaceColors.lighter,
-          text: namespaceColors.darker,
-          border: namespaceColors.darker,
-        })
-  }, [isDark])
+  const namespaceColors = {
+    darker: !isDark
+      ? `var(--${styleNamespace}-darker)`
+      : `var(--${styleNamespace}-lighter)`,
+    lighter: !isDark
+      ? `var(--${styleNamespace}-lighter)`
+      : `var(--${styleNamespace}-darker)`,
+  }
+
+  const colors = {
+    ...namespaceColors,
+    background: namespaceColors.lighter,
+    text: namespaceColors.darker,
+    border: namespaceColors.darker,
+  }
 
   return (
     <div className={className} style={style}>
