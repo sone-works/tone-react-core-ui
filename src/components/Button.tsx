@@ -1,8 +1,8 @@
-import { CSSProperties, ReactNode } from 'react'
+import { CSSProperties, useEffect, useState } from 'react'
 import { useDarkMode } from 'usehooks-ts'
 
 type ButtonProps = {
-  children?: ReactNode
+  children?: any
   className?: string
   classNames?: {
     button?: string
@@ -30,28 +30,44 @@ export default function Button({
   onClick = () => {},
   isDisabled,
 }: ButtonProps) {
-  const { isDarkMode } = useDarkMode()
-
-  const isDark = dark || isDarkMode
-
   const namespaceColors = {
     darker: `var(--${styleNamespace}-darker)`,
     lighter: `var(--${styleNamespace}-lighter)`,
   }
 
-  const colors = {
+  const [colors, setColors] = useState({
     ...namespaceColors,
-    background: !isDark ? namespaceColors.darker : namespaceColors.lighter,
-    text: !isDark ? namespaceColors.lighter : namespaceColors.darker,
-    border: !isDark ? namespaceColors.lighter : namespaceColors.darker,
-  }
+    background: namespaceColors.lighter,
+    text: namespaceColors.darker,
+    border: namespaceColors.darker,
+  })
+
+  const { isDarkMode } = useDarkMode()
+
+  const isDark = dark || isDarkMode
+
+  useEffect(() => {
+    !isDark
+      ? setColors({
+          ...namespaceColors,
+          background: namespaceColors.darker,
+          text: namespaceColors.lighter,
+          border: namespaceColors.lighter,
+        })
+      : setColors({
+          ...namespaceColors,
+          background: namespaceColors.lighter,
+          text: namespaceColors.darker,
+          border: namespaceColors.darker,
+        })
+  }, [isDark])
 
   return (
     <div className={className} style={style}>
       <button
         className={
           classNames?.button ||
-          'flex items-center justify-center w-full p-1 rounded-xl font-content text-lg'
+          'flex items-center justify-center w-full p-2 rounded-xl font-content text-lg border-2'
         }
         onClick={(e) => onClick(e)}
         disabled={isDisabled}
@@ -59,6 +75,7 @@ export default function Button({
           opacity: !isDisabled ? 1 : 0.5,
           ...(styles?.button || {
             backgroundColor: colors.background,
+            borderColor: colors.border,
             color: colors.text,
           }),
         }}

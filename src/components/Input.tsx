@@ -1,4 +1,4 @@
-import { CSSProperties, useRef } from 'react'
+import { CSSProperties, useEffect, useRef, useState } from 'react'
 import { useDarkMode } from 'usehooks-ts'
 
 type InputProps = {
@@ -30,7 +30,7 @@ type InputProps = {
 }
 
 export default function Input({
-  value,
+  value = '',
   setValue = () => {},
   className,
   classNames,
@@ -44,25 +44,41 @@ export default function Input({
   isDisabled,
   placeholder,
 }: InputProps) {
-  const inputElement = useRef<HTMLInputElement>(null)
-
-  const { isDarkMode } = useDarkMode()
-
-  const isDark = dark || isDarkMode
-
   const namespaceColors = {
     darker: `var(--${styleNamespace}-darker)`,
     lighter: `var(--${styleNamespace}-lighter)`,
   }
 
-  const colors = {
+  const [colors, setColors] = useState({
     ...namespaceColors,
-    background: !isDark ? namespaceColors.lighter : namespaceColors.darker,
-    text: !isDark ? namespaceColors.darker : namespaceColors.lighter,
-    border: !isDark ? namespaceColors.darker : namespaceColors.lighter,
-  }
+    background: namespaceColors.lighter,
+    text: namespaceColors.darker,
+    border: namespaceColors.darker,
+  })
 
-  inputElement.current &&
+  const { isDarkMode } = useDarkMode()
+
+  const isDark = dark || isDarkMode
+
+  useEffect(() => {
+    !isDark
+      ? setColors({
+          ...namespaceColors,
+          background: namespaceColors.lighter,
+          text: namespaceColors.darker,
+          border: namespaceColors.darker,
+        })
+      : setColors({
+          ...namespaceColors,
+          background: namespaceColors.darker,
+          text: namespaceColors.lighter,
+          border: namespaceColors.lighter,
+        })
+  }, [isDark])
+
+  const inputElement = useRef<HTMLInputElement>(null)
+
+  if (inputElement.current)
     inputElement.current.style.setProperty(
       '--placeholder-color',
       !isDark ? namespaceColors.darker : namespaceColors.lighter
@@ -113,7 +129,7 @@ export default function Input({
             disabled={isDisabled}
             placeholder={placeholder}
             style={styles?.input}
-            ref={inputElement}
+            //ref={inputElement}
           />
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { CSSProperties, useRef } from 'react'
+import { CSSProperties, useEffect, useRef, useState } from 'react'
 import { useDarkMode } from 'usehooks-ts'
 
 type TextareaProps = {
@@ -38,24 +38,41 @@ export default function Textarea({
   isDisabled,
   placeholder,
 }: TextareaProps) {
-  const textAreaElement = useRef<HTMLTextAreaElement>(null)
-  const { isDarkMode } = useDarkMode()
-
-  const isDark = dark || isDarkMode
-
   const namespaceColors = {
     darker: `var(--${styleNamespace}-darker)`,
     lighter: `var(--${styleNamespace}-lighter)`,
   }
 
-  const colors = {
+  const [colors, setColors] = useState({
     ...namespaceColors,
-    background: !isDark ? namespaceColors.lighter : namespaceColors.darker,
-    text: !isDark ? namespaceColors.darker : namespaceColors.lighter,
-    border: !isDark ? namespaceColors.darker : namespaceColors.lighter,
-  }
+    background: namespaceColors.lighter,
+    text: namespaceColors.darker,
+    border: namespaceColors.darker,
+  })
 
-  textAreaElement.current &&
+  const { isDarkMode } = useDarkMode()
+
+  const isDark = dark || isDarkMode
+
+  useEffect(() => {
+    !isDark
+      ? setColors({
+          ...namespaceColors,
+          background: namespaceColors.lighter,
+          text: namespaceColors.darker,
+          border: namespaceColors.darker,
+        })
+      : setColors({
+          ...namespaceColors,
+          background: namespaceColors.darker,
+          text: namespaceColors.lighter,
+          border: namespaceColors.lighter,
+        })
+  }, [isDark])
+
+  const textAreaElement = useRef<HTMLTextAreaElement>(null)
+
+  if (textAreaElement.current)
     textAreaElement.current.style.setProperty(
       '--placeholder-color',
       !isDark ? namespaceColors.darker : namespaceColors.lighter
