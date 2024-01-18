@@ -45,9 +45,9 @@ export default function Button({
 
   const colors = {
     ...namespaceColors,
-    background: namespaceColors.lighter,
-    text: namespaceColors.darker,
-    border: namespaceColors.darker,
+    background: namespaceColors.darker,
+    text: namespaceColors.lighter,
+    border: namespaceColors.lighter,
   }
 
   return (
