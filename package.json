@@ -1,6 +1,6 @@
 {
   "name": "@sone-dao/tone-react-core-ui",
-  "version": "2.16.1",
+  "version": "2.17.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/sone-dao/tone-react-core-ui.git",
