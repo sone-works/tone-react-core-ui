@@ -1,5 +1,4 @@
 import { CSSProperties } from 'react'
-import { useDarkMode } from 'usehooks-ts'
 
 type ButtonProps = {
   children?: any
@@ -14,7 +13,6 @@ type ButtonProps = {
     innerWrapper?: CSSProperties
   }
   styleNamespace?: string
-  dark?: boolean
   onClick?: Function
   isDisabled?: boolean
 }
@@ -26,53 +24,29 @@ export default function Button({
   style,
   styles,
   styleNamespace = 'global',
-  dark,
   onClick = () => {},
   isDisabled,
 }: ButtonProps) {
-  const { isDarkMode } = useDarkMode()
-
-  const isDark = dark || isDarkMode
-
-  const namespaceColors = {
-    darker: !isDark
-      ? `var(--${styleNamespace}-darker)`
-      : `var(--${styleNamespace}-lighter)`,
-    lighter: !isDark
-      ? `var(--${styleNamespace}-lighter)`
-      : `var(--${styleNamespace}-darker)`,
-  }
-
-  const colors = {
-    ...namespaceColors,
-    background: namespaceColors.darker,
-    text: namespaceColors.lighter,
-    border: namespaceColors.lighter,
-  }
-
   return (
     <div className={className} style={style}>
       <button
         className={
           classNames?.button ||
-          'flex items-center justify-center w-full p-2 rounded-xl font-content text-lg border-2'
+          `flex items-center justify-center w-full p-2 rounded-xl font-content text-lg border-2 bg-${styleNamespace}-flipped text-${styleNamespace}-flipped border-${styleNamespace}-flipped`
         }
         onClick={(e) => onClick(e)}
         disabled={isDisabled}
         style={{
           opacity: !isDisabled ? 1 : 0.5,
-          ...(styles?.button || {
-            backgroundColor: colors.background,
-            borderColor: colors.border,
-            color: colors.text,
-          }),
+          ...styles?.button,
         }}
       >
         <div
           className={
-            classNames?.innerWrapper || 'border-2 p-2 rounded-xl w-full'
+            classNames?.innerWrapper ||
+            `border-2 p-2 rounded-xl w-full border-${styleNamespace}-flipped`
           }
-          style={styles?.innerWrapper || { borderColor: colors.border }}
+          style={styles?.innerWrapper}
         >
           {children}
         </div>

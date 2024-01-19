@@ -1,5 +1,4 @@
-import { CSSProperties, useRef } from 'react'
-import { useDarkMode } from 'usehooks-ts'
+import { CSSProperties } from 'react'
 
 export type FileSelectProps = {
   name?: string
@@ -17,7 +16,6 @@ export type FileSelectProps = {
     input?: CSSProperties
   }
   styleNamespace?: string
-  dark?: boolean
   placeholder?: string
   isDisabled?: boolean
   setValue?: (file: File) => void
@@ -31,52 +29,18 @@ export default function FileSelect({
   style,
   styles,
   styleNamespace = 'global',
-  dark,
   placeholder,
   isDisabled,
   setValue = () => {},
 }: FileSelectProps) {
-  const { isDarkMode } = useDarkMode()
-
-  const isDark = dark || isDarkMode
-
-  const namespaceColors = {
-    darker: !isDark
-      ? `var(--${styleNamespace}-darker)`
-      : `var(--${styleNamespace}-lighter)`,
-    lighter: !isDark
-      ? `var(--${styleNamespace}-lighter)`
-      : `var(--${styleNamespace}-darker)`,
-  }
-
-  const colors = {
-    ...namespaceColors,
-    background: namespaceColors.lighter,
-    text: namespaceColors.darker,
-    border: namespaceColors.darker,
-  }
-
-  const inputElement = useRef<HTMLInputElement>(null)
-
-  if (inputElement.current)
-    inputElement.current.style.setProperty(
-      '--placeholder-color',
-      !dark ? namespaceColors.darker : namespaceColors.lighter
-    )
   return (
     <div className={className} style={style}>
       <div
         className={
-          classNames?.wrapper || 'flex flex-col rounded-xl px-2 py-1 border-2'
+          classNames?.wrapper ||
+          `flex flex-col rounded-xl px-2 py-1 border-2 bg-${styleNamespace} text-${styleNamespace} border-${styleNamespace}`
         }
-        style={{
-          ...(styles?.wrapper || {
-            backgroundColor: colors.background,
-            color: colors.text,
-            borderColor: colors.border,
-          }),
-          opacity: isDisabled ? 0.5 : 1,
-        }}
+        style={styles?.wrapper}
       >
         {label && (
           <label
@@ -92,11 +56,11 @@ export default function FileSelect({
           name={name}
           className={
             classNames?.input ||
-            'cursor-pointer text-global-flipped font-content file:rounded-xl file:border-solid file:border-2 file:border-global file:bg-global-flipped file:text-global-flipped file:text-xs file:font-content file:mr-2'
+            `cursor-pointer text-global-flipped font-content file:rounded-xl file:border-solid file:border-2 file:border-global file:bg-global-flipped file:text-global-flipped file:text-xs file:font-content file:mr-2 placeholder:text-${styleNamespace}`
           }
           placeholder={placeholder}
+          disabled={isDisabled}
           onChange={(e) => setValue(e.target.files![0])}
-          ref={inputElement}
         />
       </div>
     </div>

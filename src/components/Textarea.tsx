@@ -1,5 +1,4 @@
-import { CSSProperties, useRef } from 'react'
-import { useDarkMode } from 'usehooks-ts'
+import { CSSProperties } from 'react'
 
 type TextareaProps = {
   name?: string
@@ -20,7 +19,6 @@ type TextareaProps = {
     textarea?: CSSProperties
   }
   styleNamespace?: string
-  dark?: boolean
   placeholder?: string
 }
 
@@ -34,49 +32,19 @@ export default function Textarea({
   style,
   styles,
   styleNamespace = 'global',
-  dark,
   isDisabled,
   placeholder,
 }: TextareaProps) {
-  const { isDarkMode } = useDarkMode()
-
-  const isDark = dark || isDarkMode
-
-  const namespaceColors = {
-    darker: !isDark
-      ? `var(--${styleNamespace}-darker)`
-      : `var(--${styleNamespace}-lighter)`,
-    lighter: !isDark
-      ? `var(--${styleNamespace}-lighter)`
-      : `var(--${styleNamespace}-darker)`,
-  }
-
-  const colors = {
-    ...namespaceColors,
-    background: namespaceColors.lighter,
-    text: namespaceColors.darker,
-    border: namespaceColors.darker,
-  }
-
-  const textAreaElement = useRef<HTMLTextAreaElement>(null)
-
-  if (textAreaElement.current)
-    textAreaElement.current.style.setProperty(
-      '--placeholder-color',
-      !dark ? namespaceColors.darker : namespaceColors.lighter
-    )
-
   return (
     <div className={'group' + className && ' ' + className} style={style}>
       <div
-        className={classNames?.wrapper || 'rounded-xl px-2 py-1 border-2'}
+        className={
+          classNames?.wrapper ||
+          `rounded-xl px-2 py-1 border-2 bg-${styleNamespace} text-${styleNamespace} border-${styleNamespace}`
+        }
         style={{
           opacity: isDisabled ? 0.5 : 1,
-          ...(styles?.wrapper || {
-            backgroundColor: colors.background,
-            borderColor: colors.border,
-            color: colors.text,
-          }),
+          ...styles?.wrapper,
         }}
       >
         {label && (
@@ -91,14 +59,13 @@ export default function Textarea({
           name={name}
           className={
             classNames?.textarea ||
-            'w-full bg-transparent outline-none font-content resize-none placeholder:opacity-30'
+            `w-full bg-transparent outline-none font-content resize-none placeholder:opacity-30 placeholder:text-${styleNamespace}`
           }
           style={styles?.textarea}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           disabled={isDisabled}
           placeholder={placeholder}
-          ref={textAreaElement}
         />
       </div>
     </div>
