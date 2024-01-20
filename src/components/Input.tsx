@@ -66,14 +66,7 @@ export default function Input({
   const inputElement = useRef(null)
 
   return (
-    <div
-      className={'group' + className && ' ' + className}
-      style={style}
-      onFocus={() => setFocused(true)}
-      onBlur={() => !isHovering && setFocused(false)}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
-    >
+    <div className={'group' + className && ' ' + className} style={style}>
       <div
         className={
           classNames?.wrapper ||
@@ -83,6 +76,8 @@ export default function Input({
           opacity: isDisabled ? 0.5 : 1,
           ...styles?.wrapper,
         }}
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
       >
         {label && (
           <label
@@ -112,11 +107,13 @@ export default function Input({
             }
             value={value}
             name={name}
-            onChange={(e) => setValue(e.target.value)}
             disabled={isDisabled}
             placeholder={placeholder}
             style={styles?.input}
             ref={inputElement}
+            onChange={(e) => setValue(e.target.value)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => !isHovering && setFocused(false)}
           />
           {endContent && (
             <div
@@ -131,7 +128,8 @@ export default function Input({
       {results && isFocused && (
         <div
           className="relative w-full max-w-full"
-          onFocus={() => setFocused(true)}
+          onMouseEnter={() => setHovering(true)}
+          onMouseUp={() => setHovering(false)}
         >
           <div
             className={
