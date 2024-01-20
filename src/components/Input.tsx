@@ -52,6 +52,7 @@ export default function Input({
   placeholder,
 }: InputProps) {
   const [isFocused, setFocused] = useState<boolean>(false)
+  const [isHovering, setHovering] = useState<boolean>(false)
 
   const wrapperVariantClassNames = () => {
     switch (variant) {
@@ -69,7 +70,9 @@ export default function Input({
       className={'group' + className && ' ' + className}
       style={style}
       onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
+      onBlur={() => !isHovering && setFocused(false)}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
     >
       <div
         className={

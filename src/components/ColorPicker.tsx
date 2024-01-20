@@ -71,16 +71,12 @@ export default function ColorPicker({
             onClick={() => colorPickerElement.current?.click()}
           >
             <input
-              className="opacity-0"
+              className="opacity-0 h-full w-full"
               type="color"
               name={name}
               value={value}
               onChange={(e) => setValue(e.target.value)}
               ref={colorPickerElement}
-              style={{
-                width: 0,
-                height: 0,
-              }}
             />
           </div>
         </div>
