@@ -51,7 +51,7 @@ export default function Input({
   isDisabled,
   placeholder,
 }: InputProps) {
-  const [isResultsOpen, setResultsOpen] = useState<boolean>(false)
+  const [isFocused, setFocused] = useState<boolean>(false)
 
   const wrapperVariantClassNames = () => {
     switch (variant) {
@@ -65,7 +65,12 @@ export default function Input({
   const inputElement = useRef(null)
 
   return (
-    <div className={'group' + className && ' ' + className} style={style}>
+    <div
+      className={'group' + className && ' ' + className}
+      style={style}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+    >
       <div
         className={
           classNames?.wrapper ||
@@ -120,8 +125,11 @@ export default function Input({
           )}
         </div>
       </div>
-      {isResultsOpen && (
-        <div className="relative w-full max-w-full">
+      {results && isFocused && (
+        <div
+          className="relative w-full max-w-full"
+          onFocus={() => setFocused(true)}
+        >
           <div
             className={
               classNames?.results ||

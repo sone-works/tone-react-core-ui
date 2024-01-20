@@ -58,7 +58,6 @@ export default function ColorPicker({
       >
         <div
           className="flex items-center rounded-l-xl cursor-pointer p-2"
-          onClick={() => colorPickerElement.current?.click()}
           style={{ borderColor: colors.darker }}
         >
           <div
@@ -69,6 +68,7 @@ export default function ColorPicker({
               height: '2rem',
               width: '2rem',
             }}
+            onClick={() => colorPickerElement.current?.click()}
           >
             <input
               className="opacity-0"
@@ -77,7 +77,10 @@ export default function ColorPicker({
               value={value}
               onChange={(e) => setValue(e.target.value)}
               ref={colorPickerElement}
-              style={{ height: 0, width: 0 }}
+              style={{
+                width: 0,
+                height: 0,
+              }}
             />
           </div>
         </div>
