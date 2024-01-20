@@ -7,6 +7,7 @@ import Chip from './components/Chip'
 import ColorPicker from './components/ColorPicker'
 import FileSelect from './components/FileSelect'
 import Form from './components/Form'
+import FormGroup from './components/FormGroup'
 import Input from './components/Input'
 import Page from './components/Page'
 import Radio from './components/Radio'
@@ -28,6 +29,7 @@ export {
   ColorPicker,
   FileSelect,
   Form,
+  FormGroup,
   Input,
   Page,
   Radio,

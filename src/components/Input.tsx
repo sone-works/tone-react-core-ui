@@ -1,8 +1,10 @@
-import { CSSProperties } from 'react'
+import { CSSProperties, useRef, useState } from 'react'
 
 type InputProps = {
   value?: string
   setValue?: Function
+  results?: any
+  variant?: 'solid' | 'outlined'
   className?: string
   classNames?: {
     wrapper?: string
@@ -10,6 +12,8 @@ type InputProps = {
     innerWrapper?: string
     startContent?: string
     input?: string
+    endContent?: string
+    results?: string
   }
   style?: CSSProperties
   styles?: {
@@ -18,18 +22,23 @@ type InputProps = {
     innerWrapper?: CSSProperties
     startContent?: CSSProperties
     input?: CSSProperties
+    endContent?: CSSProperties
+    results?: CSSProperties
   }
   styleNamespace?: string
   label?: string
   name?: string
   startContent?: any
+  endContent?: any
   isDisabled?: boolean
   placeholder?: string
 }
 
 export default function Input({
-  value = '',
+  value,
   setValue = () => {},
+  results,
+  variant = 'outlined',
   className,
   classNames,
   style,
@@ -38,15 +47,29 @@ export default function Input({
   label,
   name,
   startContent,
+  endContent,
   isDisabled,
   placeholder,
 }: InputProps) {
+  const [isResultsOpen, setResultsOpen] = useState<boolean>(false)
+
+  const wrapperVariantClassNames = () => {
+    switch (variant) {
+      case 'solid':
+        return `bg-${styleNamespace}-flipped text-${styleNamespace}-flipped`
+      case 'outlined':
+        return `bg-${styleNamespace} text-${styleNamespace}`
+    }
+  }
+
+  const inputElement = useRef(null)
+
   return (
     <div className={'group' + className && ' ' + className} style={style}>
       <div
         className={
           classNames?.wrapper ||
-          `rounded-xl px-2 py-1 border-2 bg-${styleNamespace} text-${styleNamespace} border-${styleNamespace}`
+          `rounded-xl px-2 py-1 border-2 bg-${styleNamespace} text-${styleNamespace} border-${styleNamespace} ${wrapperVariantClassNames()}`
         }
         style={{
           opacity: isDisabled ? 0.5 : 1,
@@ -77,7 +100,7 @@ export default function Input({
           <input
             className={
               classNames?.input ||
-              `w-full bg-transparent outline-none font-content placeholder:text-${styleNamespace}`
+              `w-full bg-transparent outline-none font-content placeholder:opacity-30 placeholder:text-${styleNamespace}`
             }
             value={value}
             name={name}
@@ -85,9 +108,31 @@ export default function Input({
             disabled={isDisabled}
             placeholder={placeholder}
             style={styles?.input}
+            ref={inputElement}
           />
+          {endContent && (
+            <div
+              className={classNames?.endContent || 'p-1'}
+              style={styles?.endContent}
+            >
+              {endContent}
+            </div>
+          )}
         </div>
       </div>
+      {isResultsOpen && (
+        <div className="relative w-full max-w-full">
+          <div
+            className={
+              classNames?.results ||
+              `absolute mt-1 rounded-xl w-full ${wrapperVariantClassNames()}`
+            }
+            style={{ ...styles?.results, zIndex: 333 }}
+          >
+            {results}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
