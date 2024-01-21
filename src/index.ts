@@ -17,7 +17,9 @@ import Slider from './components/Slider'
 import Switch from './components/Switch'
 import Tab from './components/Tab'
 import Tabs from './components/Tabs'
+import Tags from './components/Tags'
 import Textarea from './components/Textarea'
+import TonePicker from './components/TonePicker'
 
 export {
   Avatar,
@@ -39,5 +41,7 @@ export {
   Switch,
   Tab,
   Tabs,
+  Tags,
   Textarea,
+  TonePicker,
 }
