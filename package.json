@@ -18,6 +18,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
     "@sone-dao/sone-react-utils": "1.0.1",
+    "@sone-dao/tone-react-api": "^2.10.0",
     "@sone-dao/tone-react-css-utils": "^0.2.1",
     "accessible-colors": "^1.0.5",
     "framer-motion": "^10.16.5",
