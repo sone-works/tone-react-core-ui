@@ -2,7 +2,7 @@ import { CSSProperties, useRef, useState } from 'react'
 
 type InputProps = {
   value?: string
-  setValue?: Function
+  setValue?: (value: string) => void
   results?: any
   variant?: 'solid' | 'outlined'
   className?: string

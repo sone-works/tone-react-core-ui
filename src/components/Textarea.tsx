@@ -4,7 +4,7 @@ type TextareaProps = {
   name?: string
   label?: string
   value?: string
-  setValue?: Function
+  setValue?: (value: string) => void
   isDisabled?: boolean
   className?: string
   classNames?: {
@@ -59,7 +59,7 @@ export default function Textarea({
           name={name}
           className={
             classNames?.textarea ||
-            `w-full bg-transparent outline-none font-content resize-none placeholder:opacity-30 placeholder:text-${styleNamespace}`
+            `w-full bg-transparent outline-none font-content resize-none scrollbar-none placeholder:opacity-30 placeholder:text-${styleNamespace}`
           }
           style={styles?.textarea}
           value={value}

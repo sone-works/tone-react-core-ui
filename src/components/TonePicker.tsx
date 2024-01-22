@@ -1,4 +1,4 @@
-import { isAAContrast } from 'accessible-colors'
+import { getRandomAAColor, isAAContrast, randomColor } from 'accessible-colors'
 import { useEffect, useState } from 'react'
 import ColorPicker from './ColorPicker'
 
@@ -50,6 +50,23 @@ export default function TonePicker({
           accessible contrast. Please choose another combination.
         </div>
       )}
+      <div className="flex items-center justify-end text-sm">
+        Need help picking colors?
+        <button
+          type="button"
+          className="outline-none bg-global text-global text-sm rounded-xl ml-2 p-1"
+          onClick={() => {
+            const random = randomColor()
+
+            setColors([random, getRandomAAColor(random, true)])
+          }}
+        >
+          <div className="p-2 border-2 border-global rounded-xl">
+            <i className="fa-fw fa-duotone fa-brush mr-21" />
+            Random Tone
+          </div>
+        </button>
+      </div>
     </div>
   )
 }
