@@ -14,6 +14,7 @@ type FormGroupProps = {
     label?: CSSProperties
   }
   styleNamespace?: string
+  disabled?: boolean
 }
 
 export default function FormGroup({
@@ -24,6 +25,7 @@ export default function FormGroup({
   style,
   styles,
   styleNamespace = 'global',
+  disabled = false,
 }: FormGroupProps) {
   return (
     <div className={className} style={style}>

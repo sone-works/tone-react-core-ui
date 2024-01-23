@@ -15,6 +15,7 @@ type ButtonProps = {
   styleNamespace?: string
   onClick?: Function
   isDisabled?: boolean
+  isSubmit?: boolean
 }
 
 export default function Button({
@@ -26,6 +27,7 @@ export default function Button({
   styleNamespace = 'global',
   onClick = () => {},
   isDisabled,
+  isSubmit = true,
 }: ButtonProps) {
   return (
     <div className={className} style={style}>
@@ -34,6 +36,7 @@ export default function Button({
           classNames?.button ||
           `flex items-center justify-center w-full p-2 rounded-xl font-content text-lg border-2 bg-${styleNamespace}-flipped text-${styleNamespace}-flipped border-${styleNamespace}-flipped`
         }
+        type={!isSubmit ? 'button' : 'submit'}
         onClick={(e) => onClick(e)}
         disabled={isDisabled}
         style={{

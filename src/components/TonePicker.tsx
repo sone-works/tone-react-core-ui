@@ -50,7 +50,7 @@ export default function TonePicker({
           accessible contrast. Please choose another combination.
         </div>
       )}
-      <div className="flex items-center justify-end text-sm">
+      <div className="flex items-center justify-end text-sm mt-4">
         Need help picking colors?
         <button
           type="button"

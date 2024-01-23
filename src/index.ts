@@ -3,6 +3,7 @@ import Box from './components/Box'
 import Button from './components/Button'
 import Carousel from './components/Carousel'
 import CarouselItem from './components/CarouselItem'
+import Checkbox from './components/Checkbox'
 import Chip from './components/Chip'
 import ColorPicker from './components/ColorPicker'
 import FileSelect from './components/FileSelect'
@@ -23,6 +24,7 @@ export {
   Button,
   Carousel,
   CarouselItem,
+  Checkbox,
   Chip,
   ColorPicker,
   FileSelect,
